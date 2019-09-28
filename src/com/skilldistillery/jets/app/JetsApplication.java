@@ -19,7 +19,6 @@ public class JetsApplication {
 		Scanner scanner = new Scanner(System.in);
 		JetsApplication japp = new JetsApplication();
 		japp.airfield = new Airfield();
-
 		japp.loadTexts(japp.airfield);
 		scanner.close();
 
@@ -42,17 +41,16 @@ public class JetsApplication {
 				long price = Long.parseLong(fields[4]);
 				int ceiling = Integer.parseInt(fields[5]);
 				String type = (fields[6]);
-				int index = Integer.parseInt(fields[7]);
 
 				if (type.contentEquals("F")) {
-					j = new FighterJet(model, make, speed, range, price, ceiling, type, index);
+					j = new FighterJet(model, make, speed, range, price, ceiling, type);
 					airfield.addJet(j);
 
 				} else if (type.contentEquals("C")) {
-					j = new TransportJet(model, make, speed, range, price, ceiling, type, index);
+					j = new TransportJet(model, make, speed, range, price, ceiling, type);
 					airfield.addJet(j);
 				} else if (type.contentEquals("T")) {
-					j = new TrainerJet(model, make, speed, range, price, ceiling, type, index);
+					j = new TrainerJet(model, make, speed, range, price, ceiling, type);
 					airfield.addJet(j);
 				}
 
@@ -121,10 +119,12 @@ public class JetsApplication {
 	}
 
 	public void listAllJets() {
-
+		int count = 0;
 		List<Jet> jets = airfield.getJets();
 		for (Jet jet : jets) {
-			System.out.println(jet);
+			System.out.println(("Index # " + count + " " + jet));
+			count++;
+
 		}
 
 	}
@@ -133,7 +133,12 @@ public class JetsApplication {
 
 		List<Jet> jets = airfield.getJets();
 		for (Jet jet : jets) {
+			System.out.println();
 			jet.fly();
+			System.out.println(jet.getMake() + " " + jet.getModel());
+			System.out.println("At top speed: " + jet.getSpeed() + " MPH, I have a max");
+			System.out.printf("flight time time of %.2f", (jet.getRange() / jet.getSpeed()));
+			System.out.print(" hours\n");
 
 		}
 
@@ -161,7 +166,7 @@ public class JetsApplication {
 	public void UserAddJet(Scanner scanner) {
 
 		Jet j;
-		int index = airfield.getJets().size();
+
 		System.out.println("Type of jet? ( F = fighter, T = trainer, C  = transport)");
 		String type = scanner.next();
 
@@ -179,33 +184,29 @@ public class JetsApplication {
 			long price = scanner.nextLong();
 			System.out.println("What is the ceiling? ");
 			int ceiling = scanner.nextInt();
-			index++;
 
 			if (type.contentEquals("F")) {
-				j = new FighterJet(model, make, speed, range, price, ceiling, type, index);
+				j = new FighterJet(model, make, speed, range, price, ceiling, type);
 				airfield.addJet(j);
 
 			} else if (type.contentEquals("C")) {
-				j = new TransportJet(model, make, speed, range, price, ceiling, type, index);
+				j = new TransportJet(model, make, speed, range, price, ceiling, type);
 				airfield.addJet(j);
 			} else if (type.contentEquals("T")) {
-				j = new TrainerJet(model, make, speed, range, price, ceiling, type, index);
+				j = new TrainerJet(model, make, speed, range, price, ceiling, type);
 				airfield.addJet(j);
 			}
 
 		}
-		System.out.println("Please enter one of the three types of jets: F, C, T");
 
 	}
 
 	public void removeJet(Scanner scanner) {
 		System.out.println("Which aircraft would you like to remove?");
-		System.out.println("Please select a serial number");
-		List<Jet> jets = airfield.getJets();
-		for (Jet jet : jets) {
-			System.out.println(jet);
-		}
+		System.out.println("Please select a reference number");
+		listAllJets();
 		int indexRemove = scanner.nextInt();
+
 		airfield.getJets().remove(indexRemove);
 
 	}

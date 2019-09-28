@@ -9,15 +9,13 @@ public abstract class Jet {
 	private long price;
 	private int ceiling;
 	private String make;
-	private int index;
 
 	// C O N S T R U C T O R S
-
 	public Jet() {
 
 	}
 
-	public Jet(String model, String make, double speed, int range, long price, int ceiling, String type, int index) {
+	public Jet(String model, String make, double speed, int range, long price, int ceiling, String type) {
 		super();
 		this.model = model;
 		this.speed = speed;
@@ -25,7 +23,7 @@ public abstract class Jet {
 		this.price = price;
 		this.ceiling = ceiling;
 		this.make = make;
-		this.index = index;
+
 	}
 
 	// M E T H O D S
@@ -87,10 +85,9 @@ public abstract class Jet {
 
 	@Override
 	public String toString() {
+
 		StringBuilder builder = new StringBuilder();
 
-		builder.append("Reference # = ");
-		builder.append(index);
 		builder.append(" Model = ");
 		builder.append(model);
 		builder.append(", Speed = ");

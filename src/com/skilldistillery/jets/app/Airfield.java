@@ -1,14 +1,14 @@
 package com.skilldistillery.jets.app;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 public class Airfield {
 
 	// F I E L D S
 	private List<Jet> jets = new ArrayList<>();
+	
+	// M E T H O D S
 
 	public List<Jet> getJets() {
 		return jets;
