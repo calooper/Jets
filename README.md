@@ -1,11 +1,11 @@
 #### JETS APPLICATION
 
-###Overview
-This project is designed to utilize superclasses, interfaces, and arraylists
+### Overview
+This project is designed to utilize superclasses, interfaces, and ArrayLists
 with items being loaded from a text file. The text file is composed of
 various types of aircrafts with their respected attributes (speed, range,
 price, etc.). Each aircraft is created as an object and stored into an
-arraylist in a class called Airfield, which serves as a repository for
+ArrayList in a class called Airfield, which serves as a repository for
 for the aircraft inventory. There are 3 different categories of aircrafts -
 fighter - trainer - and transport. Each of those three types of planes have
 their own class are are all subclasses of an abstract class called Jet.
@@ -30,8 +30,8 @@ Option 7 allows a user to add a jet while option 8 allows a user to remove one.
 The users add or remove changes are reflected when the user choose the option to
 lists the fleet.  
 
-###Challenges
-The first puzzling challenge was loading the arraylist from the text file. I
+###  Challenges
+The first puzzling challenge was loading the ArrayList from the text file. I
 unknowingly added two additional blank lines in my text file, which in return,
 kept displaying an array-index-out-of-bounds exception.
 
@@ -46,7 +46,7 @@ the displayPlanes method that I used to display all the planes. This way, the
 counter stayed constant with the index numbers and not specifically to each
 plane.
 
-##Thoughts
+### Thoughts
 I really enjoyed this project. This week had a lot of new concepts for me to
 digest, and this project allowed me to wrap everything together and develop
 a better understanding of using abstract methods, overrides, and interfaces.
