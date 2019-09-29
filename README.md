@@ -6,13 +6,13 @@ with items being loaded from a text file. The text file is composed of
 various types of aircrafts with their respected attributes (speed, range,
 price, etc.). Each aircraft is created as an object and stored into an
 ArrayList in a class called Airfield, which serves as a repository for
-for the aircraft inventory. There are 3 different categories of aircrafts -
+the current inventory. There are 3 different categories of aircrafts -
 fighter - trainer - and transport. Each of those three types of planes have
 their own class are are all subclasses of an abstract class called Jet.
 
 A class called JetApplication is where the program starts
 from the main method. The main calls a launch method where the user is
-immediately prompted with a menu of item options to select from:
+immediately prompted with a menu of options to select from:
 
 1. List fleet
 2. Fly a jet
@@ -26,10 +26,12 @@ immediately prompted with a menu of item options to select from:
 
 
 The menu was created with a while-loop switch statement that stops when the user
-selects option 9. Options 5 & 6 call classes that use implemented interfaces.
-Option 7 allows a user to add a jet while option 8 allows a user to remove one.
-The users add or remove changes are reflected when the user chooses the option
-to display the fleet.  
+selects option 9. If 9 is selected, the user is asked if they want to save as a
+text file. If yes is selected, the user will be asked to name the file before
+the new text file is created. Options 5 & 6 call classes that use implemented
+interfaces. Option 7 allows a user to add a jet while option 8 allows a user
+to remove one. The users add or remove changes are reflected when the user
+chooses the option to display the fleet.  
 
 ###  Challenges
 The first challenge was loading the ArrayList from the text file. I

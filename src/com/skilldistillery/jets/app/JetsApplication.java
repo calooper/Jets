@@ -315,7 +315,7 @@ public class JetsApplication {
 		}
 
 		else { int status = 0;
-		System.out.println("Porgram terminated");
+		System.out.println("Program terminated");
 		System.exit(status);
 			
 
