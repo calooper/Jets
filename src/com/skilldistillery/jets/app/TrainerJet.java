@@ -10,7 +10,7 @@ public class TrainerJet extends Jet {
 	@Override
 	public void fly() {
 
-		System.out.println(" I am a trainer jet");
+		System.out.println("I am a trainer jet");
 
 	}
 
