@@ -12,7 +12,7 @@ their own class are are all subclasses of an abstract class called Jet.
 
 A class called JetApplication is where the program starts
 from the main method. The main calls a launch method where the user is
-immediately prompted with a menu of item choices to choose from:
+immediately prompted with a menu of items choices to choose from:
 
 1. List fleet
 2. Fly all jets
@@ -24,7 +24,7 @@ immediately prompted with a menu of item choices to choose from:
 8. Remove a jet from Fleet
 9. Quit
 
-The menu was created from a while-loop switch statement that stops when the user
+The menu was created with a while-loop switch statement that stops when the user
 selects option 9. Options 5 & 6 call classes that use implemented interfaces.
 Option 7 allows a user to add a jet while option 8 allows a user to remove one.
 The users add or remove changes are reflected when the user choose the option to

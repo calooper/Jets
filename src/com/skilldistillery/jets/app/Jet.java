@@ -7,7 +7,6 @@ public abstract class Jet {
 	private double speed;
 	private int range;
 	private long price;
-	private int ceiling;
 	private String make;
 
 	// C O N S T R U C T O R S
@@ -15,13 +14,12 @@ public abstract class Jet {
 
 	}
 
-	public Jet(String model, String make, double speed, int range, long price, int ceiling, String type) {
+	public Jet(String model, String make, double speed, int range, long price, String type) {
 		super();
 		this.model = model;
 		this.speed = speed;
 		this.range = range;
 		this.price = price;
-		this.ceiling = ceiling;
 		this.make = make;
 
 	}
@@ -67,14 +65,6 @@ public abstract class Jet {
 		this.price = price;
 	}
 
-	public int getCeiling() {
-		return ceiling;
-	}
-
-	public void setCeiling(int ceiling) {
-		this.ceiling = ceiling;
-	}
-
 	public String getMake() {
 		return make;
 	}
@@ -96,8 +86,6 @@ public abstract class Jet {
 		builder.append(range);
 		builder.append(", Price = ");
 		builder.append(price);
-		builder.append(", Ceiling = ");
-		builder.append(ceiling);
 		builder.append(", Make = ");
 		builder.append(make);
 		return builder.toString();

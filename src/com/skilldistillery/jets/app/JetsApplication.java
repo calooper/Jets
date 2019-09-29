@@ -2,6 +2,7 @@ package com.skilldistillery.jets.app;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
@@ -39,18 +40,17 @@ public class JetsApplication {
 				double speed = Double.parseDouble(fields[2]);
 				int range = Integer.parseInt(fields[3]);
 				long price = Long.parseLong(fields[4]);
-				int ceiling = Integer.parseInt(fields[5]);
-				String type = (fields[6]);
+				String type = (fields[5]);
 
 				if (type.contentEquals("F")) {
-					j = new FighterJet(model, make, speed, range, price, ceiling, type);
+					j = new FighterJet(model, make, speed, range, price, type);
 					airfield.addJet(j);
 
 				} else if (type.contentEquals("C")) {
-					j = new TransportJet(model, make, speed, range, price, ceiling, type);
+					j = new TransportJet(model, make, speed, range, price, type);
 					airfield.addJet(j);
 				} else if (type.contentEquals("T")) {
-					j = new TrainerJet(model, make, speed, range, price, ceiling, type);
+					j = new TrainerJet(model, make, speed, range, price, type);
 					airfield.addJet(j);
 				}
 
@@ -69,7 +69,7 @@ public class JetsApplication {
 		while (keepDisplaying == true) {
 			System.out.println("-------------------------------------");
 			System.out.println("1. List Fleet");
-			System.out.println("2. Fly all jets");
+			System.out.println("2. Fly a jets");
 			System.out.println("3. View fastest jet");
 			System.out.println("4. View jet with longest range ");
 			System.out.println("5. Load all Cargo jets");
@@ -85,7 +85,7 @@ public class JetsApplication {
 				listAllJets();
 				break;
 			case 2:
-				flyAllJets();
+				flyAJet(scanner, airfield);
 				break;
 			case 3:
 				fastestJet();
@@ -103,10 +103,15 @@ public class JetsApplication {
 				UserAddJet(scanner);
 				break;
 			case 8:
-				removeJet(scanner);
+				removeJet(scanner, airield);
 				break;
 			case 9:
-				System.out.println("Program ending...");
+				try {
+					saveFile(scanner);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				System.out.println("Program terminated.");
 				keepDisplaying = false;
 				break;
 			default:
@@ -129,6 +134,34 @@ public class JetsApplication {
 
 	}
 
+	public void flyAJet(Scanner scanner, Airfield airfield) {
+		boolean keepGoing = true;
+
+		while (keepGoing == true) {
+			System.out.println("-----------------------");
+			System.out.println("1. Fly all jets");
+			System.out.println("2. Fly a specific jet");
+			System.out.println("3. Go back to main");
+			System.out.println("-----------------------");
+			int userChoice = scanner.nextInt();
+
+			switch (userChoice) {
+			case 1:
+				flyAllJets();
+				break;
+			case 2:
+				flySpecificJets(scanner);
+				break;
+			case 3:
+				displayMainMenu(airfield);
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+
 	public void flyAllJets() {
 
 		List<Jet> jets = airfield.getJets();
@@ -139,7 +172,26 @@ public class JetsApplication {
 			System.out.println("At top speed: " + jet.getSpeed() + " MPH, I have a max");
 			System.out.printf("flight time time of %.2f", (jet.getRange() / jet.getSpeed()));
 			System.out.print(" hours\n");
+		}
 
+	}
+
+	public void flySpecificJets(Scanner scanner) {
+
+		System.out.println("Please type the model of the plane you want to fly. e.g. F/A-18 \n");
+		listAllJets();
+		String userInput = scanner.next();
+		List<Jet> jets = airfield.getJets();
+		for (Jet jet : jets) {
+
+			if (jet.getModel().contentEquals(userInput)) {
+				System.out.println();
+				jet.fly();
+				System.out.println(jet.getMake() + " " + jet.getModel());
+				System.out.println("At top speed: " + jet.getSpeed() + " MPH, I have a max");
+				System.out.printf("flight time time of %.2f", (jet.getRange() / jet.getSpeed()));
+				System.out.print(" hours\n");
+			}
 		}
 
 	}
@@ -167,10 +219,11 @@ public class JetsApplication {
 
 		Jet j;
 
-		System.out.println("Type of jet? ( F = fighter, T = trainer, C  = transport)");
+		System.out.println("What type of jet do you wan to add to the airfield inventory? ");
+		System.out.println("F = fighter, T = trainer, C  = transport");
 		String type = scanner.next();
 
-		if (type.equals("F") || type.equals("T") || type.equals("C")) {
+		if (type.equalsIgnoreCase("F") || type.equalsIgnoreCase("T") || type.equalsIgnoreCase("C")) {
 
 			System.out.println("What is the make? ");
 			String make = scanner.next();
@@ -182,18 +235,16 @@ public class JetsApplication {
 			int range = scanner.nextInt();
 			System.out.println("What is the price? ");
 			long price = scanner.nextLong();
-			System.out.println("What is the ceiling? ");
-			int ceiling = scanner.nextInt();
 
-			if (type.contentEquals("F")) {
-				j = new FighterJet(model, make, speed, range, price, ceiling, type);
+			if (type.equalsIgnoreCase("F")) {
+				j = new FighterJet(model, make, speed, range, price, type);
 				airfield.addJet(j);
 
-			} else if (type.contentEquals("C")) {
-				j = new TransportJet(model, make, speed, range, price, ceiling, type);
+			} else if (type.equalsIgnoreCase("C")) {
+				j = new TransportJet(model, make, speed, range, price, type);
 				airfield.addJet(j);
-			} else if (type.contentEquals("T")) {
-				j = new TrainerJet(model, make, speed, range, price, ceiling, type);
+			} else if (type.equalsIgnoreCase("T")) {
+				j = new TrainerJet(model, make, speed, range, price, type);
 				airfield.addJet(j);
 			}
 
@@ -201,13 +252,22 @@ public class JetsApplication {
 
 	}
 
-	public void removeJet(Scanner scanner) {
+	public void removeJet(Scanner scanner, Airfield airield) {
 		System.out.println("Which aircraft would you like to remove?");
-		System.out.println("Please select a reference number");
+		System.out.println("Please select an index number: ");
 		listAllJets();
 		int indexRemove = scanner.nextInt();
 
-		airfield.getJets().remove(indexRemove);
+		System.out.println("Are you sure you want to remove: Y / N ");
+		String userInput = scanner.next();
+		if (userInput.equalsIgnoreCase("Y")) {
+
+			System.out.println();
+			airfield.getJets().remove(indexRemove);
+		} else if (userInput.equalsIgnoreCase("N")) {
+			displayMainMenu(airield);
+		} else
+			removeJet(scanner, airield);
 
 	}
 
@@ -231,5 +291,35 @@ public class JetsApplication {
 			}
 		}
 
+	}
+
+	public void saveFile(Scanner scanner) throws IOException {
+
+
+		System.out.println("Do you want to save your current inventory to a text file? (Y / N)");
+		String userInput = scanner.next();
+
+		if (userInput.equalsIgnoreCase("Y")) {
+			
+			System.out.println("What do you want to name the file? ");
+			String fileName = scanner.next();
+
+			List<Jet> jets = airfield.getJets();
+			FileWriter writer = new FileWriter( fileName + ".txt");
+
+			for (Jet jet : jets) {
+				writer.write(jet + System.lineSeparator());
+			}
+			System.out.println("File successfully saved as " + fileName + ".txt");
+			writer.close();
+		}
+
+		else { int status = 0;
+		System.out.println("Porgram terminated");
+		System.exit(status);
+			
+
+		}
+	
 	}
 }
