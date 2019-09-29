@@ -16,9 +16,9 @@ immediately prompted with a menu of item options to select from:
 
 1. List fleet
 2. Fly a jet
-  1. Fly all jets
-  2. Fly a specific jets
-  3. Main Menu
+  -1. Fly all jets
+  -2. Fly a specific jets
+  -3. Main Menu
 3. View fastest jet
 4. View jet with longest range
 5. Load all Cargo Jets
@@ -26,7 +26,7 @@ immediately prompted with a menu of item options to select from:
 7. Add a jet to Fleet
 8. Remove a jet from Fleet
 9. Quit
-  1. Save to file?
+  -1. Save to file?
 
 The menu was created with a while-loop switch statement that stops when the user
 selects option 9. Options 5 & 6 call classes that use implemented interfaces.
