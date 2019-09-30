@@ -27,7 +27,7 @@ public class JetsApplication {
 
 	}
 
-	public void loadTexts(Airfield airield, String file) {
+	public List<Jet> loadTexts(Airfield airield, String file) {
 		String[] fields;
 		String line = "";
 		Jet j;
@@ -62,6 +62,7 @@ public class JetsApplication {
 		}
 
 		displayMainMenu(airield);
+		return airfield.getJets();
 	}
 
 	public void displayMainMenu(Airfield airield) {

@@ -9,6 +9,10 @@ public class Airfield {
 	private List<Jet> jets = new ArrayList<>();
 	
 	// M E T H O D S
+	public List<Jet> returnList( ){
+		return jets;
+		
+	}
 
 	public List<Jet> getJets() {
 		return jets;
