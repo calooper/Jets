@@ -20,17 +20,19 @@ public class JetsApplication {
 		Scanner scanner = new Scanner(System.in);
 		JetsApplication japp = new JetsApplication();
 		japp.airfield = new Airfield();
-		japp.loadTexts(japp.airfield);
+		String file = "jetinfo.txt";
+		japp.loadTexts(japp.airfield, file);
 		scanner.close();
+		
 
 	}
 
-	public void loadTexts(Airfield airield) {
+	public void loadTexts(Airfield airield, String file) {
 		String[] fields;
 		String line = "";
 		Jet j;
 
-		try (BufferedReader bufIn = new BufferedReader(new FileReader("jetinfo.txt"))) {
+		try (BufferedReader bufIn = new BufferedReader(new FileReader(file))) {
 
 			while ((line = bufIn.readLine()) != null) {
 
